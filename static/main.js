@@ -10,6 +10,7 @@ let RegistrationForm = (function() {
     const email = document.getElementById('email'),
           password = document.getElementById('password'),
           meter = document.getElementById('passwordStrengthMeter'),
+          passwordStrengthContainer = document.getElementById('passwordStrengthContainer'),
           passwordStrengthText = document.getElementById('passwordStrengthText'),
           passwordErrDetail = document.getElementById('passwordErrDetail'),
           showDetailLink = document.getElementById('showDetailLink'),
@@ -26,7 +27,10 @@ let RegistrationForm = (function() {
                 meter.value = result.score;
                 score = result.score;
             }
-            passwordStrengthText.innerHTML = 'Password Strength: ' + strength[score];
+            let scoreValue = strength[score];
+            passwordStrengthContainer.classList.remove('hidden');
+            passwordStrengthText.innerHTML = scoreValue;
+            passwordStrengthText.className = `err${scoreValue}`;
             if (hideDetailLink.classList.contains('hidden') && !passwordErrDetail.classList.contains('hidden')){
                 hideDetailLink.classList.remove('hidden');
             } else if (hideDetailLink.classList.contains('hidden')) {
@@ -44,6 +48,7 @@ let RegistrationForm = (function() {
     let _resetElementState = () => {
         meter.value = 0;
         passwordStrengthText.innerHTML = '';
+        passwordStrengthContainer.classList.add('hidden');
         showDetailLink.classList.add('hidden');
         hideDetailLink.classList.add('hidden');
         passwordErrDetail.classList.add('hidden');

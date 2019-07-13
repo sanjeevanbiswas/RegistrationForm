@@ -40,7 +40,7 @@ header {
 
 .inputSection {
     margin: 20px 0;
-    min-height: 113px;
+    min-height: 120px;
 }
 
 .inputSection label {
@@ -104,6 +104,10 @@ meter::-webkit-meter-bar {
     font-size: 13px;
 }
 
+.info-text #passwordStrengthText{
+    font-weight: bold;
+}
+
 .email-err{
     color: #c21934;
     margin-top: 10px;
@@ -127,18 +131,23 @@ meter::-webkit-meter-bar {
     display: none;
 }
 
-
 /* Webkit based browsers */
-meter[value="1"]::-webkit-meter-optimum-value { background: red; }
-meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }
-meter[value="3"]::-webkit-meter-optimum-value { background: orange; }
-meter[value="4"]::-webkit-meter-optimum-value { background: green; }
+meter[value="1"]::-webkit-meter-optimum-value { background: #c21934; }
+meter[value="2"]::-webkit-meter-optimum-value { background: #f9dda3; }
+meter[value="3"]::-webkit-meter-optimum-value { background: #ea853f; }
+meter[value="4"]::-webkit-meter-optimum-value { background: #10bc5e; }
 
 /* Gecko based browsers */
-meter[value="1"]::-moz-meter-bar { background: red; }
-meter[value="2"]::-moz-meter-bar { background: yellow; }
-meter[value="3"]::-moz-meter-bar { background: orange; }
-meter[value="4"]::-moz-meter-bar { background: green; }
+meter[value="1"]::-moz-meter-bar { background: #c21934; }
+meter[value="2"]::-moz-meter-bar { background: #f9dda3; }
+meter[value="3"]::-moz-meter-bar { background: #ea853f; }
+meter[value="4"]::-moz-meter-bar { background: #10bc5e; }
+
+/* Webkit based browsers, Gecko based browsers */
+span.errInvalid, span.errBad { color: #c21934; }
+span.errWeak { color: #f9dda3; }
+span.errGood { color: #ea853f; }
+span.errStrong { color: #10bc5e; }
 
 /*-- /responsive design --*/
 @media(max-width:768px) {

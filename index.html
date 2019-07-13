@@ -26,7 +26,10 @@
                     <input id="password" type="text" class="form-control" placeholder="Password" required="required">
                 </div>
                 <meter max="4" id="passwordStrengthMeter"></meter>
-                <span class="info-text" id="passwordStrengthText"></span>
+                <span class="info-text hidden" id="passwordStrengthContainer">
+                    Password Strength:&nbsp;
+                    <span class="errInvalid" id="passwordStrengthText"></span>
+                </span>
                 <a class="link-detail hidden" id="showDetailLink" onclick="RegistrationForm.togglePasswordErrorDetail(true)">Show Details...</a>
                 <a class="link-detail hidden" id="hideDetailLink" onclick="RegistrationForm.togglePasswordErrorDetail(false)">Hide Details...</a>
                 <div class="info-detail-list hidden" id="passwordErrDetail">
