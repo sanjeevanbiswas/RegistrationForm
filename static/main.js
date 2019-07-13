@@ -7,9 +7,9 @@ let RegistrationForm = (function() {
         4: 'Strong'
     };
 
-    const email = document.getElementById('email'),
-          password = document.getElementById('password'),
-          meter = document.getElementById('passwordStrengthMeter'),
+    const emailElem = document.getElementById('email'),
+          passwordElem = document.getElementById('password'),
+          meterElem = document.getElementById('passwordStrengthMeter'),
           passwordStrengthContainer = document.getElementById('passwordStrengthContainer'),
           passwordStrengthText = document.getElementById('passwordStrengthText'),
           passwordErrDetail = document.getElementById('passwordErrDetail'),
@@ -17,8 +17,8 @@ let RegistrationForm = (function() {
           hideDetailLink = document.getElementById('hideDetailLink'),
           emailErrText = document.getElementById('emailErrText');
 
-    email.addEventListener('input', () => {
-        let val = email.value.trim();
+    emailElem.addEventListener('input', () => {
+        let val = emailElem.value.trim();
         if (val !== '' && !_validateEmail(val)) {
             emailErrText.classList.remove('hidden');
         } else {
@@ -26,15 +26,15 @@ let RegistrationForm = (function() {
         }
     });
 
-    password.addEventListener('input', () => {
-        let val = password.value;
+    passwordElem.addEventListener('input', () => {
+        let val = passwordElem.value;
         if (val !== '') {
             let {isValidPassword, score, acceptanceCriteria} = _validatePassword(val);
             if (isValidPassword) {
-                meter.value = score;
+                meterElem.value = score;
             } else{
                 score = 0;
-                meter.value = 0;
+                meterElem.value = 0;
             }
             let scoreValue = strength[score];
             passwordStrengthContainer.classList.remove('hidden');
@@ -51,7 +51,7 @@ let RegistrationForm = (function() {
     });
 
     let _resetPasswordErrElementState = () => {
-        meter.value = 0;
+        meterElem.value = 0;
         passwordStrengthText.innerHTML = '';
         passwordStrengthContainer.classList.add('hidden');
         showDetailLink.classList.add('hidden');
@@ -59,7 +59,7 @@ let RegistrationForm = (function() {
         passwordErrDetail.classList.add('hidden');
     }
 
-    let _validatePassword = (value=password.value) => {
+    let _validatePassword = (value=passwordElem.value) => {
         let charArr = value.split('');
         let acceptanceCriteria = {
             length: charArr.length >= 8,
@@ -67,7 +67,7 @@ let RegistrationForm = (function() {
             uppercase: false,
             number: false,
             special: false,
-            strength: meter.value >= 2
+            strength: meterElem.value >= 2
         };
 
         charArr.forEach(char => {
@@ -119,14 +119,14 @@ let RegistrationForm = (function() {
 
     let _togglePasswordErrorDetail = showDetail => {
         if (showDetail) {
-            let val = password.value;
-            if (password.value !== '') {
+            let val = passwordElem.value;
+            if (passwordElem.value !== '') {
                 showDetailLink.classList.add('hidden');
                 hideDetailLink.classList.remove('hidden');
             }
             passwordErrDetail.classList.remove('hidden');
         } else {
-            if (password.value !== '') {
+            if (passwordElem.value !== '') {
                 showDetailLink.classList.remove('hidden');
                 hideDetailLink.classList.add('hidden');
             }
@@ -138,7 +138,7 @@ let RegistrationForm = (function() {
 
     let _submit = () => {
         let {isValidPassword, score, acceptanceCriteria} = _validatePassword();
-        if (!_validateEmail(email.value.trim())) {
+        if (!_validateEmail(emailElem.value.trim())) {
             emailErrText.classList.remove('hidden');
             return false;
         } else if (!isValidPassword || score < 2) {
