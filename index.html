@@ -4,8 +4,30 @@
         <title>Registration Form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="./static/style.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     </head>
+
     <body>
+        <header></header>
+        <div class="content">
+            <div class='logo'><img alt='logo' src="./static/logo-1.png"></div>
+            <div class="inputSection">
+                <label>Email</label>
+                <div class="group">
+                    <img class="icon" src="./static/user-solid.svg" />
+                    <input id="email" type="text" class="form-control" placeholder="Email" required="required">
+                </div>
+            </div>
+            <div class="inputSection" style="height: 122px">
+                <label>Password</label>
+                <div class="group">
+                    <img class="icon" src="./static/key-solid.svg" />
+                    <input id="password" type="text" class="form-control" placeholder="Password" required="required">
+                </div>
+            </div>
+
+            <button type="submit" onclick="RegistrationForm.submit()">Submit</button>
+        </div>
         <script type="text/javascript" src="./static/main.js"></script>
     </body>
 </html>

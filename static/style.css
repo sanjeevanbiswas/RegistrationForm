@@ -6,3 +6,84 @@ body {
     background-size: cover;
     font-family: 'Raleway', sans-serif;
 }
+header {
+    padding: 50px 0;
+}
+
+.logo {
+    text-align: center;
+}
+.logo>img { max-width: 200px; }
+
+.content {
+    background: rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 3em;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.group {
+    display: flex;
+    padding: 15px 5px;
+    background-color: #ffffff;
+}
+
+.group .icon {
+    color: #fc3955;
+    font-size: 20px;
+    padding: 0 10px;
+    width: 12px;
+}
+
+.inputSection {
+    margin: 20px 0;
+}
+
+.inputSection label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #929292;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    background: transparent;
+    color: #000;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+}
+
+button {
+    background: #fc3955;
+    color: #ffffff;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    padding: 12px 60px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 6px;
+    outline: none;
+}
+
+button:hover {
+    background-color: #00BCD4;
+    transition-duration: 5s;
+}
+
+.info-text {
+    color: #6f6f6f;
+    font-size: 13px;
+}
