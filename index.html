@@ -23,7 +23,7 @@
                 <label>Password</label>
                 <div class="group">
                     <img class="icon" src="./static/key-solid.svg" />
-                    <input id="password" type="text" class="form-control" placeholder="Password" required="required">
+                    <input id="password" type="password" class="form-control" placeholder="Password" required="required">
                 </div>
                 <meter max="4" id="passwordStrengthMeter"></meter>
                 <span class="info-text hidden" id="passwordStrengthContainer">
@@ -57,6 +57,11 @@
                         <img class="icon checkmark hidden" src="./static/check.svg"/>
                         <img class="icon close" src="./static/close.svg" />
                         <span>Password should contain atleast 1 special character</span>
+                    </div>
+                    <div class="group info-item" id="err_strength">
+                        <img class="icon checkmark hidden" src="./static/check.svg"/>
+                        <img class="icon close" src="./static/close.svg" />
+                        <span>Password strength should not be invalid or bad.</span>
                     </div>
                 </div>
             </div>

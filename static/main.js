@@ -20,12 +20,12 @@ let RegistrationForm = (function() {
     password.addEventListener('input', () => {
         let val = password.value;
         if (val !== '') {
-            meter.value = 0;
-            let score = 0;
-            if (_validatePassword(val)) {
-                let result = zxcvbn(val);
-                meter.value = result.score;
-                score = result.score;
+            let {isValidPassword, score, acceptanceCriteria} = _validatePassword(val);
+            if (isValidPassword) {
+                meter.value = score;
+            } else{
+                score = 0;
+                meter.value = 0;
             }
             let scoreValue = strength[score];
             passwordStrengthContainer.classList.remove('hidden');
@@ -56,29 +56,42 @@ let RegistrationForm = (function() {
 
     let _validatePassword = (value=password.value) => {
         let charArr = value.split('');
-        let result = {
+        let acceptanceCriteria = {
             length: charArr.length >= 8,
             lowercase: false,
             uppercase: false,
             number: false,
             special: false,
+            strength: meter.value >= 2
         };
 
         charArr.forEach(char => {
             let charCode = char.charCodeAt();
             if (charCode >= 48 && charCode <= 57) { // 0 to 9
-                result.number = true;
+                acceptanceCriteria.number = true;
             } else if (charCode >= 65 && charCode <= 90) { // Uppercase Characters
-                result.uppercase = true;
+                acceptanceCriteria.uppercase = true;
             } else if (charCode >= 97 && charCode <= 122) { // Lowercase Characters
-                result.lowercase = true;
+                acceptanceCriteria.lowercase = true;
             } else {
-                result.special = true;
+                acceptanceCriteria.special = true;
             }
         });
 
-        _renderPasswordStrengthInfo(result);
-        return result.length && result.lowercase && result.uppercase && result.number && result.special;
+        let result = zxcvbn(value);
+        let score = result.score;
+        acceptanceCriteria.strength = score >= 2;
+        let isValidPassword = acceptanceCriteria.length && acceptanceCriteria.lowercase && acceptanceCriteria.uppercase && acceptanceCriteria.number && acceptanceCriteria.special;
+        if (!isValidPassword) {
+            score = 0;
+        }
+        
+        _renderPasswordStrengthInfo(acceptanceCriteria);
+        return {
+            isValidPassword,
+            score,
+            acceptanceCriteria
+        };
     };
 
     let _renderPasswordStrengthInfo = result => {
@@ -119,10 +132,11 @@ let RegistrationForm = (function() {
     let _validateEmail = str => str.match(/^[A-Z0-9._%+\-'!#$&*\/=?^`]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
     let _submit = () => {
+        let {isValidPassword, score, acceptanceCriteria} = _validatePassword();
         if (!_validateEmail(email.value.trim())) {
             emailErrText.classList.remove('hidden');
             return false;
-        } else if (!_validatePassword() || meter.value < 2) {
+        } else if (!isValidPassword || score < 2) {
             _togglePasswordErrorDetail(true);
             return false;
         }    
