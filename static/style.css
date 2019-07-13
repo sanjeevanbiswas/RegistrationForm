@@ -102,15 +102,13 @@ meter::-webkit-meter-bar {
     font-size: 13px;
 }
 
-.info-detail-list{
-
-}
-
 .link-detail{
     text-decoration: none;
     font-size: 11px;
     float: right;
     margin-top: 3px;
+    color: #1074BC;
+    cursor: pointer;
 }
 
 .info-item{
