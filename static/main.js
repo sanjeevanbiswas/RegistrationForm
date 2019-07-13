@@ -17,6 +17,15 @@ let RegistrationForm = (function() {
           hideDetailLink = document.getElementById('hideDetailLink'),
           emailErrText = document.getElementById('emailErrText');
 
+    email.addEventListener('input', () => {
+        let val = email.value.trim();
+        if (val !== '' && !_validateEmail(val)) {
+            emailErrText.classList.remove('hidden');
+        } else {
+            emailErrText.classList.add('hidden');
+        }
+    });
+
     password.addEventListener('input', () => {
         let val = password.value;
         if (val !== '') {
@@ -37,15 +46,11 @@ let RegistrationForm = (function() {
                 showDetailLink.classList.remove('hidden');
             }
         } else {
-            _resetElementState();
+            _resetPasswordErrElementState();
         }
     });
 
-    email.addEventListener('input', () => {
-        emailErrText.classList.add('hidden');
-    });
-
-    let _resetElementState = () => {
+    let _resetPasswordErrElementState = () => {
         meter.value = 0;
         passwordStrengthText.innerHTML = '';
         passwordStrengthContainer.classList.add('hidden');
