@@ -10,10 +10,11 @@ let RegistrationForm = (function() {
     const email = document.getElementById('email'),
           password = document.getElementById('password'),
           meter = document.getElementById('passwordStrengthMeter'),
-          text = document.getElementById('passwordStrengthText'),
+          passwordStrengthText = document.getElementById('passwordStrengthText'),
           passwordErrDetail = document.getElementById('passwordErrDetail'),
           showDetailLink = document.getElementById('showDetailLink'),
-          hideDetailLink = document.getElementById('hideDetailLink');
+          hideDetailLink = document.getElementById('hideDetailLink'),
+          emailErrText = document.getElementById('emailErrText');
 
     password.addEventListener('input', () => {
         let val = password.value;
@@ -25,7 +26,7 @@ let RegistrationForm = (function() {
                 meter.value = result.score;
                 score = result.score;
             }
-            text.innerHTML = 'Password Strength: ' + strength[score];
+            passwordStrengthText.innerHTML = 'Password Strength: ' + strength[score];
             if (hideDetailLink.classList.contains('hidden') && !passwordErrDetail.classList.contains('hidden')){
                 hideDetailLink.classList.remove('hidden');
             } else if (hideDetailLink.classList.contains('hidden')) {
@@ -36,9 +37,13 @@ let RegistrationForm = (function() {
         }
     });
 
+    email.addEventListener('input', () => {
+        emailErrText.classList.add('hidden');
+    });
+
     let _resetElementState = () => {
         meter.value = 0;
-        text.innerHTML = '';
+        passwordStrengthText.innerHTML = '';
         showDetailLink.classList.add('hidden');
         hideDetailLink.classList.add('hidden');
         passwordErrDetail.classList.add('hidden');
@@ -110,7 +115,7 @@ let RegistrationForm = (function() {
 
     let _submit = () => {
         if (!_validateEmail(email.value.trim())) {
-            alert('Please enter a valid Email address.');
+            emailErrText.classList.remove('hidden');
             return false;
         } else if (!_validatePassword() || meter.value < 2) {
             _togglePasswordErrorDetail(true);

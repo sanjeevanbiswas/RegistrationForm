@@ -11,12 +11,13 @@
         <header></header>
         <div class="content">
             <div class='logo'><img alt='logo' src="./static/logo-1.png"></div>
-            <div class="inputSection">
+            <div class="inputSection" style="min-height: 95px;">
                 <label>Email</label>
                 <div class="group">
                     <img class="icon" src="./static/user-solid.svg" />
                     <input id="email" type="text" class="form-control" placeholder="Email" required="required">
                 </div>
+                <div class="info-text email-err hidden" id="emailErrText">Please enter a valid Email address.</div>
             </div>
             <div class="inputSection">
                 <label>Password</label>

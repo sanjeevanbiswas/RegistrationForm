@@ -40,6 +40,7 @@ header {
 
 .inputSection {
     margin: 20px 0;
+    min-height: 113px;
 }
 
 .inputSection label {
@@ -101,6 +102,11 @@ meter::-webkit-meter-bar {
 .info-text, .info-item {
     color: #494949;
     font-size: 13px;
+}
+
+.email-err{
+    color: #c21934;
+    margin-top: 10px;
 }
 
 .link-detail{
