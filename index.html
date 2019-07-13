@@ -18,12 +18,14 @@
                     <input id="email" type="text" class="form-control" placeholder="Email" required="required">
                 </div>
             </div>
-            <div class="inputSection" style="height: 122px">
+            <div class="inputSection">
                 <label>Password</label>
                 <div class="group">
                     <img class="icon" src="./static/key-solid.svg" />
                     <input id="password" type="text" class="form-control" placeholder="Password" required="required">
                 </div>
+                <meter max="4" id="passwordStrengthMeter"></meter>
+                <span class="info-text" id="passwordStrengthText"></span>
             </div>
 
             <button type="submit" onclick="RegistrationForm.submit()">Submit</button>
