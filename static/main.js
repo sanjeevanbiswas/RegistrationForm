@@ -16,17 +16,19 @@ let RegistrationForm = (function() {
           hideDetailLink = document.getElementById('hideDetailLink');
 
     password.addEventListener('input', () => {
-        var val = password.value;
+        let val = password.value;
         if (val !== '') {
             meter.value = 0;
             let score = 0;
             if (_validatePassword(val)) {
-                var result = zxcvbn(val);
+                let result = zxcvbn(val);
                 meter.value = result.score;
                 score = result.score;
             }
             text.innerHTML = 'Password Strength: ' + strength[score];
-            if (passwordErrDetail.classList.contains('hidden')){
+            if (hideDetailLink.classList.contains('hidden') && !passwordErrDetail.classList.contains('hidden')){
+                hideDetailLink.classList.remove('hidden');
+            } else if (hideDetailLink.classList.contains('hidden')) {
                 showDetailLink.classList.remove('hidden');
             }
         } else {
@@ -89,12 +91,17 @@ let RegistrationForm = (function() {
 
     let _togglePasswordErrorDetail = showDetail => {
         if (showDetail) {
-            showDetailLink.classList.add('hidden');
-            hideDetailLink.classList.remove('hidden');
+            let val = password.value;
+            if (password.value !== '') {
+                showDetailLink.classList.add('hidden');
+                hideDetailLink.classList.remove('hidden');
+            }
             passwordErrDetail.classList.remove('hidden');
         } else {
-            showDetailLink.classList.remove('hidden');
-            hideDetailLink.classList.add('hidden');
+            if (password.value !== '') {
+                showDetailLink.classList.remove('hidden');
+                hideDetailLink.classList.add('hidden');
+            }
             passwordErrDetail.classList.add('hidden');
         }
     }
