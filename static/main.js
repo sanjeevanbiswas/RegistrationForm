@@ -1,4 +1,4 @@
-let RegistrationForm = (function() {
+let _registrationForm = (function() {
     const strength = {
         0: 'Invalid',
         1: 'Bad',
@@ -7,59 +7,61 @@ let RegistrationForm = (function() {
         4: 'Strong'
     };
 
-    const emailElem = document.getElementById('email'),
-          passwordElem = document.getElementById('password'),
-          meterElem = document.getElementById('passwordStrengthMeter'),
-          passwordStrengthContainer = document.getElementById('passwordStrengthContainer'),
-          passwordStrengthText = document.getElementById('passwordStrengthText'),
-          passwordErrDetail = document.getElementById('passwordErrDetail'),
-          showDetailLink = document.getElementById('showDetailLink'),
-          hideDetailLink = document.getElementById('hideDetailLink'),
-          emailErrText = document.getElementById('emailErrText');
+    let _init = () => {
+        this.emailElem = document.getElementById('email');
+        this.passwordElem = document.getElementById('password');
+        this.meterElem = document.getElementById('passwordStrengthMeter');
+        this.passwordStrengthContainer = document.getElementById('passwordStrengthContainer');
+        this.passwordStrengthText = document.getElementById('passwordStrengthText');
+        this.passwordErrDetail = document.getElementById('passwordErrDetail');
+        this.showDetailLink = document.getElementById('showDetailLink');
+        this.hideDetailLink = document.getElementById('hideDetailLink');
+        this.emailErrText = document.getElementById('emailErrText');
 
-    emailElem.addEventListener('input', () => {
-        let val = emailElem.value.trim();
-        if (val !== '' && !_validateEmail(val)) {
-            emailErrText.classList.remove('hidden');
-        } else {
-            emailErrText.classList.add('hidden');
-        }
-    });
-
-    passwordElem.addEventListener('input', () => {
-        let val = passwordElem.value;
-        if (val !== '') {
-            let {isValidPassword, score, acceptanceCriteria} = _validatePassword(val);
-            if (isValidPassword) {
-                meterElem.value = score;
-            } else{
-                score = 0;
-                meterElem.value = 0;
+        this.emailElem.addEventListener('input', () => {
+            let val = this.emailElem.value.trim();
+            if (val !== '' && !_validateEmail(val)) {
+                this.emailErrText.classList.remove('hidden');
+            } else {
+                this.emailErrText.classList.add('hidden');
             }
-            let scoreValue = strength[score];
-            passwordStrengthContainer.classList.remove('hidden');
-            passwordStrengthText.innerHTML = scoreValue;
-            passwordStrengthText.className = `err${scoreValue}`;
-            if (hideDetailLink.classList.contains('hidden') && !passwordErrDetail.classList.contains('hidden')){
-                hideDetailLink.classList.remove('hidden');
-            } else if (hideDetailLink.classList.contains('hidden')) {
-                showDetailLink.classList.remove('hidden');
-            }
-        } else {
-            _resetPasswordErrElementState();
-        }
-    });
+        });
 
-    let _resetPasswordErrElementState = () => {
-        meterElem.value = 0;
-        passwordStrengthText.innerHTML = '';
-        passwordStrengthContainer.classList.add('hidden');
-        showDetailLink.classList.add('hidden');
-        hideDetailLink.classList.add('hidden');
-        passwordErrDetail.classList.add('hidden');
+        this.passwordElem.addEventListener('input', () => {
+            let val = this.passwordElem.value;
+            if (val !== '') {
+                let {isValidPassword, score, acceptanceCriteria} = _validatePassword(val);
+                if (isValidPassword) {
+                    this.meterElem.value = score;
+                } else{
+                    score = 0;
+                    this.meterElem.value = 0;
+                }
+                let scoreValue = strength[score];
+                this.passwordStrengthContainer.classList.remove('hidden');
+                this.passwordStrengthText.innerHTML = scoreValue;
+                this.passwordStrengthText.className = `err${scoreValue}`;
+                if (this.hideDetailLink.classList.contains('hidden') && !this.passwordErrDetail.classList.contains('hidden')){
+                    this.hideDetailLink.classList.remove('hidden');
+                } else if (this.hideDetailLink.classList.contains('hidden')) {
+                    this.showDetailLink.classList.remove('hidden');
+                }
+            } else {
+                _resetPasswordErrElementState();
+            }
+        });
     }
 
-    let _validatePassword = (value=passwordElem.value) => {
+    let _resetPasswordErrElementState = () => {
+        this.meterElem.value = 0;
+        this.passwordStrengthText.innerHTML = '';
+        this.passwordStrengthContainer.classList.add('hidden');
+        this.showDetailLink.classList.add('hidden');
+        this.hideDetailLink.classList.add('hidden');
+        this.passwordErrDetail.classList.add('hidden');
+    }
+
+    let _validatePassword = (value=this.passwordElem.value) => {
         let charArr = value.split('');
         let acceptanceCriteria = {
             length: charArr.length >= 8,
@@ -67,7 +69,7 @@ let RegistrationForm = (function() {
             uppercase: false,
             number: false,
             special: false,
-            strength: meterElem.value >= 2
+            strength: false
         };
 
         charArr.forEach(char => {
@@ -79,7 +81,7 @@ let RegistrationForm = (function() {
             } else if (charCode >= 97 && charCode <= 122) { // Lowercase Characters
                 acceptanceCriteria.lowercase = true;
             } else {
-                acceptanceCriteria.special = true;
+                acceptanceCriteria.special = true; // special character .. Considering everything else on the ascii table as special char.
             }
         });
 
@@ -119,18 +121,18 @@ let RegistrationForm = (function() {
 
     let _togglePasswordErrorDetail = showDetail => {
         if (showDetail) {
-            let val = passwordElem.value;
-            if (passwordElem.value !== '') {
-                showDetailLink.classList.add('hidden');
-                hideDetailLink.classList.remove('hidden');
+            let val = this.passwordElem.value;
+            if (this.passwordElem.value !== '') {
+                this.showDetailLink.classList.add('hidden');
+                this.hideDetailLink.classList.remove('hidden');
             }
-            passwordErrDetail.classList.remove('hidden');
+            this.passwordErrDetail.classList.remove('hidden');
         } else {
-            if (passwordElem.value !== '') {
-                showDetailLink.classList.remove('hidden');
-                hideDetailLink.classList.add('hidden');
+            if (this.passwordElem.value !== '') {
+                this.showDetailLink.classList.remove('hidden');
+                this.hideDetailLink.classList.add('hidden');
             }
-            passwordErrDetail.classList.add('hidden');
+            this.passwordErrDetail.classList.add('hidden');
         }
     }
 
@@ -138,8 +140,8 @@ let RegistrationForm = (function() {
 
     let _submit = () => {
         let {isValidPassword, score, acceptanceCriteria} = _validatePassword();
-        if (!_validateEmail(emailElem.value.trim())) {
-            emailErrText.classList.remove('hidden');
+        if (!_validateEmail(this.emailElem.value.trim())) {
+            this.emailErrText.classList.remove('hidden');
             return false;
         } else if (!isValidPassword || score < 2) {
             _togglePasswordErrorDetail(true);
@@ -149,7 +151,14 @@ let RegistrationForm = (function() {
     }
 
     return {
+        init: _init,
         submit: _submit,
-        togglePasswordErrorDetail: _togglePasswordErrorDetail
+        togglePasswordErrorDetail: _togglePasswordErrorDetail,
+        validatePassword: _validatePassword,
+        validateEmail: _validateEmail
     }
-}());
+});
+
+let RegistrationForm = new _registrationForm();
+
+export default RegistrationForm;
