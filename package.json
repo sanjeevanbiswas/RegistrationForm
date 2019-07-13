@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "http-server"
+    "start": "http-server",
+    "test": "mocha"
   },
   "dependencies": {
-    "http-server": "^0.11.1",
     "zxcvbn": "^4.4.2"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "mocha": "^6.1.4"
   }
 }
