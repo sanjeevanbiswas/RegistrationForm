@@ -97,6 +97,32 @@ meter::-webkit-meter-bar {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.info-text, .info-item {
+    color: #494949;
+    font-size: 13px;
+}
+
+.info-detail-list{
+
+}
+
+.link-detail{
+    text-decoration: none;
+    font-size: 11px;
+    float: right;
+    margin-top: 3px;
+}
+
+.info-item{
+    background-color: transparent;
+    padding: 5px;
+}
+
+.hidden{
+    display: none;
+}
+
+
 /* Webkit based browsers */
 meter[value="1"]::-webkit-meter-optimum-value { background: red; }
 meter[value="2"]::-webkit-meter-optimum-value { background: yellow; }

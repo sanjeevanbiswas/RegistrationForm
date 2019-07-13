@@ -26,6 +26,35 @@
                 </div>
                 <meter max="4" id="passwordStrengthMeter"></meter>
                 <span class="info-text" id="passwordStrengthText"></span>
+                <a href="#" class="link-detail hidden" id="showDetailLink" onclick="RegistrationForm.togglePasswordErrorDetail(true)">Show Details...</a>
+                <a href="#" class="link-detail hidden" id="hideDetailLink" onclick="RegistrationForm.togglePasswordErrorDetail(false)">Hide Details...</a>
+                <div class="info-detail-list hidden" id="passwordErrDetail">
+                    <div class="group info-item" id="err_length">
+                        <img class="icon checkmark hidden" src="./static/check.svg"/>
+                        <img class="icon close" src="./static/close.svg" />
+                        <span>Password should be of 8+ characters.</span>
+                    </div>
+                    <div class="group info-item" id="err_lowercase">
+                        <img class="icon checkmark hidden" src="./static/check.svg"/>
+                        <img class="icon close" src="./static/close.svg" />
+                        <span>Password should contain atleast 1 lowercase character.</span>
+                    </div>
+                    <div class="group info-item" id="err_uppercase">
+                        <img class="icon checkmark hidden" src="./static/check.svg"/>
+                        <img class="icon close" src="./static/close.svg" />
+                        <span>Password should contain atleast 1 uppercase character.</span>
+                    </div>
+                    <div class="group info-item" id="err_number">
+                        <img class="icon checkmark hidden" src="./static/check.svg"/>
+                        <img class="icon close" src="./static/close.svg" />
+                        <span>Password should contain atleast 1 number.</span>
+                    </div>
+                    <div class="group info-item" id="err_special">
+                        <img class="icon checkmark hidden" src="./static/check.svg"/>
+                        <img class="icon close" src="./static/close.svg" />
+                        <span>Password should contain atleast 1 special character</span>
+                    </div>
+                </div>
             </div>
 
             <button type="submit" onclick="RegistrationForm.submit()">Submit</button>
