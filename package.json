@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "http-server",
-    "test": "mocha --reporter mochawesome --require babel-core/register test.js --timeout 30000"
+    "test": "mocha --reporter mochawesome --require babel-core/register ./test/test.js --timeout 30000"
   },
   "dependencies": {
     "zxcvbn": "^4.4.2"
