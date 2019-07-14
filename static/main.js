@@ -31,6 +31,7 @@ let _registrationForm = (function() {
             let val = this.passwordElem.value;
             if (val !== '') {
                 let {isValidPassword, score, acceptanceCriteria} = _validatePassword(val);
+                _renderPasswordStrengthInfo(acceptanceCriteria);
                 if (isValidPassword) {
                     this.meterElem.value = score;
                 } else{
@@ -61,7 +62,7 @@ let _registrationForm = (function() {
         this.passwordErrDetail.classList.add('hidden');
     }
 
-    let _validatePassword = (value=this.passwordElem.value) => {
+    let _validatePassword = (value=this.passwordElem.value, _zxcvbn=zxcvbn) => {
         let charArr = value.split('');
         let acceptanceCriteria = {
             length: charArr.length >= 8,
@@ -85,7 +86,7 @@ let _registrationForm = (function() {
             }
         });
 
-        let result = zxcvbn(value);
+        let result = _zxcvbn(value);
         let score = result.score;
         acceptanceCriteria.strength = score >= 2;
         let isValidPassword = acceptanceCriteria.length && acceptanceCriteria.lowercase && acceptanceCriteria.uppercase && acceptanceCriteria.number && acceptanceCriteria.special;
@@ -93,7 +94,6 @@ let _registrationForm = (function() {
             score = 0;
         }
         
-        _renderPasswordStrengthInfo(acceptanceCriteria);
         return {
             isValidPassword,
             score,
@@ -136,10 +136,11 @@ let _registrationForm = (function() {
         }
     }
 
-    let _validateEmail = str => str.match(/^[A-Z0-9._%+\-'!#$&*\/=?^`]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+    let _validateEmail = str => !!str.trim().match(/^[A-Z0-9._%+\-'!#$&*\/=?^`]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
     let _submit = () => {
         let {isValidPassword, score, acceptanceCriteria} = _validatePassword();
+        _renderPasswordStrengthInfo(acceptanceCriteria);
         if (!_validateEmail(this.emailElem.value.trim())) {
             this.emailErrText.classList.remove('hidden');
             return false;

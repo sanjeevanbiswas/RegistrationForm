@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "start": "http-server",
-    "test": "mocha"
+    "test": "mocha --reporter mochawesome --require babel-core/register test.js --timeout 30000"
   },
   "dependencies": {
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "babel-core": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
     "http-server": "^0.11.1",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "mochawesome": "^4.0.0"
   }
 }
